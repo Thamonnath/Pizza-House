@@ -1,132 +1,950 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Pizza House</title>
-<link rel="stylesheet" href="style.css">
-</head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <title>Lanna Eats — Northern Thai Food</title>
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+    <style>
+        /* ----- reset & base ----- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background: #fdf8f2;
+            color: #2d1b14;
+            line-height: 1.5;
+            padding-bottom: 2rem;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1.25rem;
+        }
+
+        /* ----- header / nav ----- */
+        .navbar {
+            background: #1e2f2a;
+            color: #f5ede4;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .navbar .container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 0.5rem 1rem;
+        }
+
+        .brand {
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .brand i {
+            color: #f4a261;
+            font-size: 1.8rem;
+        }
+
+        .brand span {
+            color: #f4a261;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 1.5rem;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a {
+            padding: 0.3rem 0;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.2s;
+        }
+
+        .nav-links a:hover {
+            border-color: #f4a261;
+        }
+
+        .nav-links a i {
+            margin-right: 0.3rem;
+            font-size: 0.85rem;
+        }
+
+        /* ----- hero ----- */
+        .hero {
+            background: linear-gradient(135deg, #2d4a3e 0%, #1e2f2a 100%);
+            color: #f5ede4;
+            padding: 4rem 0 3.5rem;
+            text-align: center;
+            border-radius: 0 0 40px 40px;
+            margin-bottom: 2.5rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::after {
+            content: '';
+            position: absolute;
+            top: -60%;
+            right: -20%;
+            width: 400px;
+            height: 400px;
+            border-radius: 50%;
+            background: rgba(244, 162, 97, 0.08);
+            pointer-events: none;
+        }
+
+        .hero .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .hero h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 0.75rem;
+        }
+
+        .hero h1 i {
+            color: #f4a261;
+            margin-right: 0.3rem;
+        }
+
+        .hero .tagline {
+            font-size: 1.25rem;
+            max-width: 600px;
+            margin: 0 auto 1rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .hero .sub-tagline {
+            font-size: 1rem;
+            opacity: 0.7;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .hero .sub-tagline i {
+            color: #f4a261;
+            margin: 0 0.2rem;
+        }
+
+        /* ----- section titles ----- */
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            color: #1e2f2a;
+        }
+
+        .section-title i {
+            color: #f4a261;
+        }
+
+        .section-sub {
+            color: #6b5a4c;
+            margin-bottom: 2rem;
+            font-size: 1.05rem;
+            border-left: 4px solid #f4a261;
+            padding-left: 1rem;
+        }
+
+        /* ----- menu catalog ----- */
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+            gap: 1.8rem;
+            margin-top: 0.5rem;
+        }
+
+        .menu-card {
+            background: #fffcf8;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            border: 1px solid #f0e8de;
+        }
+
+        .menu-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .menu-card .image-wrap {
+            height: 200px;
+            background: #e8ddd0;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .menu-card .image-wrap img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .menu-card:hover .image-wrap img {
+            transform: scale(1.03);
+        }
+
+        .menu-card .badge-cat {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: rgba(30, 47, 42, 0.85);
+            color: #f5ede4;
+            font-size: 0.7rem;
+            font-weight: 600;
+            padding: 0.3rem 0.8rem;
+            border-radius: 30px;
+            letter-spacing: 0.3px;
+            backdrop-filter: blur(4px);
+        }
+
+        .menu-card .body {
+            padding: 1.2rem 1.2rem 1.4rem;
+        }
+
+        .menu-card .name-th {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1e2f2a;
+        }
+
+        .menu-card .name-en {
+            font-size: 0.85rem;
+            color: #7a6a5c;
+            margin-top: 0.1rem;
+        }
+
+        .menu-card .price-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 0.7rem;
+            border-top: 1px solid #f0e8de;
+            padding-top: 0.7rem;
+        }
+
+        .menu-card .price {
+            font-weight: 700;
+            font-size: 1.2rem;
+            color: #c44536;
+        }
+
+        .menu-card .price small {
+            font-weight: 400;
+            font-size: 0.75rem;
+            color: #7a6a5c;
+            margin-left: 0.1rem;
+        }
+
+        .menu-card .order-btn {
+            background: #f4a261;
+            border: none;
+            color: #1e2f2a;
+            padding: 0.35rem 1rem;
+            border-radius: 30px;
+            font-weight: 600;
+            font-size: 0.8rem;
+            cursor: default;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.4rem;
+            transition: background 0.2s;
+        }
+
+        .menu-card .order-btn i {
+            font-size: 0.7rem;
+        }
+
+        .menu-card .order-btn:hover {
+            background: #e8924e;
+        }
+
+        /* ----- ordering channels ----- */
+        .channels-section {
+            background: #fffcf8;
+            border-radius: 28px;
+            padding: 2.5rem 2rem;
+            margin-top: 2.5rem;
+            border: 1px solid #f0e8de;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+        }
+
+        .channel-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        .channel-card {
+            background: #fdf8f2;
+            border-radius: 16px;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            border: 1px solid #f0e8de;
+            transition: border-color 0.2s, background 0.2s;
+        }
+
+        .channel-card:hover {
+            border-color: #f4a261;
+            background: #fcf5eb;
+        }
+
+        .channel-card .icon-circle {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: #e8ddd0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 0.7rem;
+            font-size: 1.8rem;
+            color: #1e2f2a;
+        }
+
+        .channel-card .icon-circle.line {
+            background: #06c755;
+            color: #fff;
+        }
+        .channel-card .icon-circle.grab {
+            background: #00b14f;
+            color: #fff;
+        }
+        .channel-card .icon-circle.lineman {
+            background: #1e8c4a;
+            color: #fff;
+        }
+        .channel-card .icon-circle.walk {
+            background: #d4a373;
+            color: #fff;
+        }
+        .channel-card .icon-circle.form {
+            background: #2d4a3e;
+            color: #fff;
+        }
+
+        .channel-card h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #1e2f2a;
+        }
+
+        .channel-card p {
+            font-size: 0.85rem;
+            color: #6b5a4c;
+            margin-top: 0.2rem;
+        }
+
+        .channel-card .btn-link {
+            display: inline-block;
+            margin-top: 0.6rem;
+            background: #1e2f2a;
+            color: #f5ede4;
+            padding: 0.35rem 1.2rem;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+
+        .channel-card .btn-link:hover {
+            background: #2d4a3e;
+        }
+
+        .channel-card .btn-link i {
+            margin-right: 0.3rem;
+        }
+
+        /* ----- google form embed ----- */
+        .form-embed-wrap {
+            margin-top: 2rem;
+            border-radius: 16px;
+            overflow: hidden;
+            border: 1px solid #f0e8de;
+            background: #fffcf8;
+        }
+
+        .form-embed-wrap iframe {
+            width: 100%;
+            height: 480px;
+            border: none;
+            display: block;
+        }
+
+        .form-embed-wrap .form-label {
+            padding: 0.8rem 1.2rem;
+            background: #f5ede4;
+            font-weight: 600;
+            color: #1e2f2a;
+            display: flex;
+            align-items: center;
+            gap: 0.6rem;
+            border-bottom: 1px solid #f0e8de;
+        }
+
+        .form-embed-wrap .form-label i {
+            color: #f4a261;
+        }
+
+        /* ----- footer ----- */
+        .footer {
+            margin-top: 3rem;
+            padding: 2rem 0 1rem;
+            border-top: 1px solid #f0e8de;
+            color: #6b5a4c;
+            font-size: 0.9rem;
+        }
+
+        .footer .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .footer .social a {
+            display: inline-block;
+            margin-left: 1rem;
+            color: #6b5a4c;
+            transition: color 0.2s;
+            font-size: 1.2rem;
+        }
+
+        .footer .social a:hover {
+            color: #f4a261;
+        }
+
+        /* ----- responsive ----- */
+        @media (max-width: 768px) {
+            .navbar .container {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0.3rem;
+            }
+
+            .brand {
+                font-size: 1.3rem;
+                justify-content: center;
+            }
+
+            .nav-links {
+                justify-content: center;
+                flex-wrap: wrap;
+                gap: 0.8rem 1.2rem;
+                font-size: 0.85rem;
+            }
+
+            .hero {
+                padding: 2.5rem 0 2rem;
+                border-radius: 0 0 24px 24px;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero .tagline {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 1.6rem;
+            }
+
+            .menu-grid {
+                grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+                gap: 1.2rem;
+            }
+
+            .menu-card .image-wrap {
+                height: 150px;
+            }
+
+            .channels-section {
+                padding: 1.5rem 1rem;
+            }
+
+            .channel-grid {
+                grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+                gap: 1rem;
+            }
+
+            .form-embed-wrap iframe {
+                height: 400px;
+            }
+
+            .footer .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .footer .social {
+                margin-top: 0.3rem;
+            }
+
+            .footer .social a {
+                margin: 0 0.6rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 1.6rem;
+            }
+
+            .hero .tagline {
+                font-size: 0.9rem;
+            }
+
+            .menu-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 0.8rem;
+            }
+
+            .menu-card .body {
+                padding: 0.8rem 0.8rem 1rem;
+            }
+
+            .menu-card .name-th {
+                font-size: 0.85rem;
+            }
+
+            .menu-card .name-en {
+                font-size: 0.7rem;
+            }
+
+            .menu-card .price {
+                font-size: 1rem;
+            }
+
+            .menu-card .order-btn {
+                font-size: 0.7rem;
+                padding: 0.25rem 0.7rem;
+            }
+
+            .channel-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+
+            .section-title {
+                font-size: 1.3rem;
+            }
+        }
+
+        /* small helper */
+        .text-muted {
+            color: #6b5a4c;
+        }
+        .mt-1 {
+            margin-top: 0.5rem;
+        }
+        .mb-1 {
+            margin-bottom: 0.5rem;
+        }
+        .text-center {
+            text-align: center;
+        }
+        .gap-1 {
+            gap: 0.5rem;
+        }
+
+        /* extra polish */
+        .stall-locations {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem 2rem;
+            margin-top: 0.8rem;
+            font-size: 0.9rem;
+            color: #3d2e24;
+        }
+
+        .stall-locations i {
+            color: #f4a261;
+            width: 1.2rem;
+        }
+
+        .highlight-gold {
+            color: #f4a261;
+        }
+    </style>
+</head>
 <body>
 
-<!-- Navigation -->
-<nav class="navbar">
-<div class="logo">🍕 Pizza House</div>
-<a href="#menu">Our Menu</a>
-</nav>
+    <!-- ===== NAV ===== -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="brand">
+                <i class="fas fa-utensils"></i>
+                Lanna<span>Eats</span>
+            </div>
+            <div class="nav-links">
+                <a href="#menu"><i class="fas fa-list"></i> เมนู</a>
+                <a href="#order"><i class="fas fa-shopping-bag"></i> สั่งซื้อ</a>
+                <a href="#contact"><i class="fas fa-phone"></i> ติดต่อ</a>
+            </div>
+        </div>
+    </nav>
 
-<!-- Hero / Homepage -->
-<header class="hero">
-<div class="hero-content">
-<p class="welcome">WELCOME TO</p>
-<h1>Pizza House</h1>
+    <!-- ===== HERO ===== -->
+    <section class="hero">
+        <div class="container">
+            <h1><i class="fas fa-leaf"></i> Lanna Eats</h1>
+            <p class="tagline">
+                <i class="fas fa-quote-left" style="opacity:0.4;font-size:0.8rem;"></i>
+                ข้าวซอยต้นตำรับ · สูตรล้านนาส่งตรงถึงคุณ
+                <i class="fas fa-quote-right" style="opacity:0.4;font-size:0.8rem;"></i>
+            </p>
+            <p class="sub-tagline">
+                <i class="fas fa-check-circle"></i> สั่งง่าย · สดใหม่ · รสชาติแท้
+                <i class="fas fa-check-circle" style="margin-left:0.8rem;"></i> เปิดทุกวัน 10:00–20:00
+            </p>
+            <div class="stall-locations" style="justify-content:center;margin-top:1.2rem;">
+                <span><i class="fas fa-location-dot"></i> Chang Klan</span>
+                <span><i class="fas fa-location-dot"></i> Nimmanhaemin</span>
+                <span><i class="fas fa-location-dot"></i> Tha Phae Gate</span>
+            </div>
+        </div>
+    </section>
 
-<p class="value-proposition">
-พิซซ่าอบสดใหม่ แป้งหอมกรอบ เครื่องแน่น
-ในราคาที่เข้าถึงได้
-</p>
+    <!-- ===== MENU CATALOG ===== -->
+    <section id="menu" class="container">
+        <h2 class="section-title">
+            <i class="fas fa-utensil-spoon"></i> เมนูของเรา
+        </h2>
+        <p class="section-sub">
+            คัดสรรวัตถุดิบคุณภาพ สูตรต้นตำรับจากเชฟท้องถิ่น
+        </p>
 
-<a href="#menu" class="menu-button">
-ดูเมนู
-</a>
-</div>
-</header>
+        <div class="menu-grid" id="menuGrid">
+            <!-- menu cards will be injected by JS -->
+        </div>
+    </section>
 
-<!-- Catalog -->
-<section id="menu" class="menu-section">
-<div class="section-title">
-<p>OUR MENU</p>
-<h2>เลือกพิซซ่าที่คุณชอบ</h2>
-</div>
+    <!-- ===== ORDERING CHANNELS ===== -->
+    <section id="order" class="container">
+        <div class="channels-section">
+            <h2 class="section-title" style="margin-bottom:0.2rem;">
+                <i class="fas fa-rocket"></i> ช่องทางสั่งซื้อ
+            </h2>
+            <p class="section-sub" style="margin-bottom:0.5rem;">
+                เลือกช่องทางที่สะดวก แล้วรับออเดอร์ถึงมือคุณ
+            </p>
 
-<div class="pizza-grid">
+            <div class="channel-grid">
+                <!-- LINE OA -->
+                <div class="channel-card">
+                    <div class="icon-circle line"><i class="fab fa-line"></i></div>
+                    <h4>LINE OA</h4>
+                    <p>แอดเพื่อสั่งและรับโปร</p>
+                    <a href="#" class="btn-link" onclick="alert('🔗 เพิ่มเพื่อน LINE: @lannaeats (ตัวอย่าง)'); return false;">
+                        <i class="fab fa-line"></i> เพิ่มเพื่อน
+                    </a>
+                </div>
 
-<!-- Pizza 1 -->
-<div class="pizza-card">
-<div class="pizza-image">🍕</div>
-<div class="pizza-info">
-<h3>Margherita</h3>
-<p>ซอสมะเขือเทศและชีสแบบคลาสสิก</p>
-<span class="price">159 Baht</span>
-</div>
-</div>
+                <!-- Grab -->
+                <div class="channel-card">
+                    <div class="icon-circle grab"><i class="fas fa-motorcycle"></i></div>
+                    <h4>Grab</h4>
+                    <p>จัดส่งไว ทั่วถึง</p>
+                    <a href="#" class="btn-link" onclick="alert('🔗 สั่งผ่าน Grab: ค้นหา \"Lanna Eats\"'); return false;">
+                        <i class="fas fa-arrow-right"></i> สั่งเลย
+                    </a>
+                </div>
 
-<!-- Pizza 2 -->
-<div class="pizza-card">
-<div class="pizza-image">🍍</div>
-<div class="pizza-info">
-<h3>Hawaiian</h3>
-<p>แฮมและสับปะรด รสชาติหวานเค็มลงตัว</p>
-<span class="price">189 Baht</span>
-</div>
-</div>
+                <!-- LINE MAN -->
+                <div class="channel-card">
+                    <div class="icon-circle lineman"><i class="fas fa-truck-fast"></i></div>
+                    <h4>LINE MAN</h4>
+                    <p>ส่งด่วน ภายใน 30 นาที</p>
+                    <a href="#" class="btn-link" onclick="alert('🔗 สั่งผ่าน LINE MAN: ค้นหา \"Lanna Eats\"'); return false;">
+                        <i class="fas fa-arrow-right"></i> สั่งเลย
+                    </a>
+                </div>
 
-<!-- Pizza 3 -->
-<div class="pizza-card">
-<div class="pizza-image">🥓</div>
-<div class="pizza-info">
-<h3>Pepperoni</h3>
-<p>เปปเปอโรนีแน่น ๆ พร้อมชีสเต็มคำ</p>
-<span class="price">199 Baht</span>
-</div>
-</div>
+                <!-- Walk-in -->
+                <div class="channel-card">
+                    <div class="icon-circle walk"><i class="fas fa-store"></i></div>
+                    <h4>Walk-in</h4>
+                    <p>แวะกินที่ร้านได้ทุกสาขา</p>
+                    <a href="#contact" class="btn-link">
+                        <i class="fas fa-location-dot"></i> ดูสาขา
+                    </a>
+                </div>
 
-<!-- Pizza 4 -->
-<div class="pizza-card">
-<div class="pizza-image">🦐</div>
-<div class="pizza-info">
-<h3>Seafood Pizza</h3>
-<p>ซีฟู้ดจัดเต็มสำหรับคนรักอาหารทะเล</p>
-<span class="price">259 Baht</span>
-</div>
-</div>
+                <!-- Google Form -->
+                <div class="channel-card" style="grid-column: span 1;">
+                    <div class="icon-circle form"><i class="fas fa-google"></i></div>
+                    <h4>สั่งผ่านฟอร์ม</h4>
+                    <p>กรอกรายละเอียด แล้วเราจัดส่งให้</p>
+                    <a href="#formEmbed" class="btn-link" onclick="document.getElementById('formEmbed').scrollIntoView({behavior:'smooth'}); return false;">
+                        <i class="fas fa-pen-to-square"></i> เปิดฟอร์ม
+                    </a>
+                </div>
+            </div>
 
-<!-- Pizza 5 -->
-<div class="pizza-card">
-<div class="pizza-image">🥓</div>
-<div class="pizza-info">
-<h3>Bacon Cheese</h3>
-<p>เบคอนกรอบกับชีสเข้มข้น</p>
-<span class="price">219 Baht</span>
-</div>
-</div>
-
-<!-- Pizza 6 -->
-<div class="pizza-card">
-<div class="pizza-image">🍄</div>
-<div class="pizza-info">
-<h3>Mushroom Cheese</h3>
-<p>เห็ดหอมและชีสสำหรับสายชีส</p>
-<span class="price">189 Baht</span>
-</div>
-</div>
-
-</div>
+            <!-- Google Form embed -->
+            <div id="formEmbed" class="form-embed-wrap" style="margin-top:2rem;">
+                <div class="form-label">
+                    <i class="fas fa-file-pen"></i> ฟอร์มสั่งอาหาร — Lanna Eats
+                    <span style="margin-left:auto;font-weight:400;font-size:0.8rem;color:#6b5a4c;">
+                        <i class="fas fa-lock"></i> ปลอดภัย
+                    </span>
+                </div>
+                <iframe
+                src="https://docs.google.com/forms/d/e/1FAIpQLSdummyLannaEatsForm/viewform?embedded=true"
+                title="Lanna Eats Order Form"
+                loading="lazy">
+            </iframe>
+            <p style="padding:0.6rem 1.2rem;font-size:0.8rem;color:#6b5a4c;background:#faf5ee;border-top:1px solid #f0e8de;">
+                <i class="fas fa-info-circle"></i> หากฟอร์มไม่แสดง <a href="#" style="color:#f4a261;font-weight:600;" onclick="alert('📋 เปิดฟอร์มตัวอย่าง: https://forms.gle/ตัวอย่าง (แทนที่ด้วยลิงก์จริง)'); return false;">คลิกที่นี่</a>
+            </p>
+        </div>
+    </div>
 </section>
 
-<!-- Order Section -->
-<section class="order-section">
-<div class="order-content">
-<p>READY TO ORDER?</p>
-<h2>หิวแล้วใช่ไหม?</h2>
-<p>
-สั่งพิซซ่าสดใหม่จาก Pizza House ได้ง่าย ๆ
-ผ่าน LINE OA
-</p>
-
-<!-- เปลี่ยน URL ด้านล่างเป็น LINE OA จริงของร้าน -->
-<a href="https://line.me/"
-target="_blank"
-class="order-button">
-💬 สั่งพิซซ่า
-</a>
-</div>
-</section>
-
-<!-- Footer -->
-<footer>
-<p>© 2026 Pizza House. All Rights Reserved.</p>
+<!-- ===== CONTACT / FOOTER ===== -->
+<footer id="contact" class="footer">
+    <div class="container">
+        <div>
+            <strong style="color:#1e2f2a;font-size:1.1rem;">Lanna Eats</strong>
+            <p style="margin-top:0.2rem;font-size:0.85rem;">
+                <i class="fas fa-location-dot" style="color:#f4a261;"></i>
+                Chang Klan · Nimmanhaemin · Tha Phae Gate
+            </p>
+            <p style="font-size:0.8rem;margin-top:0.1rem;">
+                <i class="far fa-clock"></i> เปิดทุกวัน 10:00–20:00
+            </p>
+        </div>
+        <div class="social">
+            <span style="font-weight:500;margin-right:0.5rem;">ติดตาม:</span>
+            <a href="#" aria-label="Facebook" onclick="alert('FB: Lanna Eats (ตัวอย่าง)'); return false;"><i class="fab fa-facebook"></i></a>
+            <a href="#" aria-label="Instagram" onclick="alert('IG: @lannaeats (ตัวอย่าง)'); return false;"><i class="fab fa-instagram"></i></a>
+            <a href="#" aria-label="LINE" onclick="alert('LINE OA: @lannaeats (ตัวอย่าง)'); return false;"><i class="fab fa-line"></i></a>
+            <a href="#" aria-label="YouTube" onclick="alert('YouTube: Lanna Eats (ตัวอย่าง)'); return false;"><i class="fab fa-youtube"></i></a>
+        </div>
+    </div>
+    <div class="container" style="margin-top:1.2rem;border-top:1px solid #f0e8de;padding-top:1.2rem;font-size:0.75rem;color:#9a8a7c;justify-content:center;">
+        &copy; 2026 Lanna Eats · สูตรล้านนาแท้ · Made with <i class="fas fa-heart" style="color:#c44536;"></i> in Chiang Mai
+    </div>
 </footer>
+
+<!-- ===== JAVASCRIPT ===== -->
+<script>
+    (function() {
+        // ----- menu data (Updated with EXACT filenames from your images) -----
+        const menuItems = [{
+            id: 'M01',
+            name_th: 'ข้าวซอยไก่',
+            name_en: 'Khao Soi Chicken',
+            category: 'noodle',
+            price: 69,
+            cost: 28,
+            is_active: 1,
+            imgQuery: 'khao_soi_chicken.jpg'
+        }, {
+            id: 'M02',
+            name_th: 'ข้าวซอยเนื้อ',
+            name_en: 'Khao Soi Beef',
+            category: 'noodle',
+            price: 79,
+            cost: 34,
+            is_active: 1,
+            imgQuery: 'khao_soi_beef.jpg'
+        }, {
+            id: 'M03',
+            name_th: 'ข้าวซอยเจ',
+            name_en: 'Khao Soi Vegan',
+            category: 'noodle',
+            price: 69,
+            cost: 30,
+            is_active: 1,
+            imgQuery: 'khao_soi_tofu.jpg'
+        }, {
+            id: 'M04',
+            name_th: 'ไส้อั่ว',
+            name_en: 'Sai Ua Sausage',
+            category: 'side',
+            price: 49,
+            cost: 18,
+            is_active: 1,
+            imgQuery: 'sai_uah_sausage.jpg'
+        }, {
+            id: 'M05',
+            name_th: 'แคบหมู',
+            name_en: 'Pork Crackling',
+            category: 'side',
+            price: 39,
+            cost: 12,
+            is_active: 1,
+            imgQuery: 'fried_pork_rinds.jpg'
+        }, {
+            id: 'M06',
+            name_th: 'ข้าวซอยทะเล',
+            name_en: 'Khao Soi Seafood',
+            category: 'noodle',
+            price: 99,
+            cost: 45,
+            is_active: 1,
+            imgQuery: 'seafood_curry_noodles.jpg'
+        }, {
+            id: 'M07',
+            name_th: 'ชาเย็น',
+            name_en: 'Thai Iced Tea',
+            category: 'drink',
+            price: 29,
+            cost: 9,
+            is_active: 1,
+            imgQuery: 'thai_iced_tea.jpg'
+        }, {
+            id: 'M08',
+            name_th: 'น้ำส้ม',
+            name_en: 'Orange Juice',
+            category: 'drink',
+            price: 35,
+            cost: 14,
+            is_active: 1,
+            imgQuery: 'orange_juice_fresh.jpg'
+        }, {
+            id: 'M09',
+            name_th: 'ขนมจีนน้ำเงี้ยว',
+            name_en: 'Khanom Jeen Nam Ngiao',
+            category: 'noodle',
+            price: 59,
+            cost: 24,
+            is_active: 1,
+            imgQuery: 'curry_noodles_meat.jpg'
+        }, {
+            id: 'M10',
+            name_th: 'ข้าวเหนียว',
+            name_en: 'Sticky Rice',
+            category: 'side',
+            price: 15,
+            cost: 4,
+            is_active: 1,
+            imgQuery: 'sticky_rice_basket.jpg'
+        }];
+
+        // category label mapping
+        const catLabels = {
+            noodle: '🍜 เส้น',
+            side: '🍽️ เคียง',
+            drink: '🥤 เครื่องดื่ม'
+        };
+
+        // ----- render menu -----
+        const grid = document.getElementById('menuGrid');
+        if (!grid) return;
+
+        // build image URL (now uses local filenames directly)
+        function getImageUrl(query, seed) {
+            // Assuming images are in the same folder as this HTML file.
+            // If they are in an "images" folder, change to: `images/${query}`
+            return `${query}`; 
+        }
+
+        menuItems.forEach(item => {
+            const card = document.createElement('div');
+            card.className = 'menu-card';
+
+            const imgUrl = getImageUrl(item.imgQuery, item.id);
+            const catLabel = catLabels[item.category] || item.category;
+
+            card.innerHTML = `
+                <div class="image-wrap">
+                    <img src="${imgUrl}" alt="${item.name_th} — ${item.name_en}" loading="lazy"
+                         onerror="this.style.display='none'; this.parentNode.style.background='#e8ddd0'; this.parentNode.innerHTML += '<span style=\'position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:3rem;color:#b5a292;\'>🍜</span>';">
+                    <span class="badge-cat">${catLabel}</span>
+                </div>
+                <div class="body">
+                    <div class="name-th">${item.name_th}</div>
+                    <div class="name-en">${item.name_en}</div>
+                    <div class="price-row">
+                        <span class="price">${item.price} <small>฿</small></span>
+                        <span class="order-btn"><i class="fas fa-plus-circle"></i> สั่ง</span>
+                    </div>
+                </div>
+            `;
+
+            // click on "สั่ง" scrolls to ordering section
+            const btn = card.querySelector('.order-btn');
+            btn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                const orderSection = document.getElementById('order');
+                if (orderSection) {
+                    orderSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    // highlight the section
+                    orderSection.style.transition = 'background 0.3s';
+                    orderSection.style.background = '#fcf5eb';
+                    setTimeout(() => { orderSection.style.background = ''; }, 800);
+                }
+            });
+
+            grid.appendChild(card);
+        });
+
+        // ----- add a small "out of stock" note (demo) but all are active -----
+        // (all items are active per data)
+
+        console.log('🍜 Lanna Eats menu loaded —', menuItems.length, 'items');
+
+        // ----- simple location click on hero -----
+        document.querySelectorAll('.stall-locations span').forEach(el => {
+            el.style.cursor = 'pointer';
+            el.addEventListener('click', function() {
+                const name = this.textContent.trim();
+                alert(`📍 ${name} — เปิด 10:00–20:00 (ตัวอย่าง)`);
+            });
+        });
+
+    })();
+</script>
+
+<!-- fallback if JS fails -->
+<noscript>
+    <div class="container" style="padding:2rem 0;text-align:center;color:#6b5a4c;">
+        <i class="fas fa-exclamation-triangle"></i> กรุณาเปิดใช้งาน JavaScript เพื่อดูเมนู
+    </div>
+</noscript>
 
 </body>
 </html>
