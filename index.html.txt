@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pizza House</title>
+<link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- Navigation -->
+<nav class="navbar">
+<div class="logo">🍕 Pizza House</div>
+<a href="#menu">Our Menu</a>
+</nav>
+
+<!-- Hero / Homepage -->
+<header class="hero">
+<div class="hero-content">
+<p class="welcome">WELCOME TO</p>
+<h1>Pizza House</h1>
+
+<p class="value-proposition">
+พิซซ่าอบสดใหม่ แป้งหอมกรอบ เครื่องแน่น
+ในราคาที่เข้าถึงได้
+</p>
+
+<a href="#menu" class="menu-button">
+ดูเมนู
+</a>
+</div>
+</header>
+
+<!-- Catalog -->
+<section id="menu" class="menu-section">
+<div class="section-title">
+<p>OUR MENU</p>
+<h2>เลือกพิซซ่าที่คุณชอบ</h2>
+</div>
+
+<div class="pizza-grid">
+
+<!-- Pizza 1 -->
+<div class="pizza-card">
+<div class="pizza-image">🍕</div>
+<div class="pizza-info">
+<h3>Margherita</h3>
+<p>ซอสมะเขือเทศและชีสแบบคลาสสิก</p>
+<span class="price">159 Baht</span>
+</div>
+</div>
+
+<!-- Pizza 2 -->
+<div class="pizza-card">
+<div class="pizza-image">🍍</div>
+<div class="pizza-info">
+<h3>Hawaiian</h3>
+<p>แฮมและสับปะรด รสชาติหวานเค็มลงตัว</p>
+<span class="price">189 Baht</span>
+</div>
+</div>
+
+<!-- Pizza 3 -->
+<div class="pizza-card">
+<div class="pizza-image">🥓</div>
+<div class="pizza-info">
+<h3>Pepperoni</h3>
+<p>เปปเปอโรนีแน่น ๆ พร้อมชีสเต็มคำ</p>
+<span class="price">199 Baht</span>
+</div>
+</div>
+
+<!-- Pizza 4 -->
+<div class="pizza-card">
+<div class="pizza-image">🦐</div>
+<div class="pizza-info">
+<h3>Seafood Pizza</h3>
+<p>ซีฟู้ดจัดเต็มสำหรับคนรักอาหารทะเล</p>
+<span class="price">259 Baht</span>
+</div>
+</div>
+
+<!-- Pizza 5 -->
+<div class="pizza-card">
+<div class="pizza-image">🥓</div>
+<div class="pizza-info">
+<h3>Bacon Cheese</h3>
+<p>เบคอนกรอบกับชีสเข้มข้น</p>
+<span class="price">219 Baht</span>
+</div>
+</div>
+
+<!-- Pizza 6 -->
+<div class="pizza-card">
+<div class="pizza-image">🍄</div>
+<div class="pizza-info">
+<h3>Mushroom Cheese</h3>
+<p>เห็ดหอมและชีสสำหรับสายชีส</p>
+<span class="price">189 Baht</span>
+</div>
+</div>
+
+</div>
+</section>
+
+<!-- Order Section -->
+<section class="order-section">
+<div class="order-content">
+<p>READY TO ORDER?</p>
+<h2>หิวแล้วใช่ไหม?</h2>
+<p>
+สั่งพิซซ่าสดใหม่จาก Pizza House ได้ง่าย ๆ
+ผ่าน LINE OA
+</p>
+
+<!-- เปลี่ยน URL ด้านล่างเป็น LINE OA จริงของร้าน -->
+<a href="https://line.me/"
+target="_blank"
+class="order-button">
+💬 สั่งพิซซ่า
+</a>
+</div>
+</section>
+
+<!-- Footer -->
+<footer>
+<p>© 2026 Pizza House. All Rights Reserved.</p>
+</footer>
+
+</body>
+</html>
